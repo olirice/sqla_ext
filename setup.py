@@ -5,6 +5,7 @@
 import logging
 import os
 import sys
+from typing import Optional
 
 import setuptools
 
@@ -12,13 +13,13 @@ PACKAGE_NAME = "sqla_ext"
 MINIMUM_PYTHON_VERSION = "3.6"
 
 
-def check_python_version():
+def check_python_version() -> None:
     """Exit when the Python version is too low."""
     if sys.version < MINIMUM_PYTHON_VERSION:
         sys.exit("Python {0}+ is required.".format(MINIMUM_PYTHON_VERSION))
 
 
-def read_package_variable(key, filename="__init__.py"):
+def read_package_variable(key: str, filename: str = "__init__.py") -> "Optional[str]":
     """Read the value of a variable from the package without importing."""
     module_path = os.path.join("src", PACKAGE_NAME, filename)
     with open(module_path) as module:
@@ -30,7 +31,7 @@ def read_package_variable(key, filename="__init__.py"):
     return None
 
 
-def build_description():
+def build_description() -> str:
     """Build a description for the project from documentation files."""
     try:
         readme = open("README.rst").read()

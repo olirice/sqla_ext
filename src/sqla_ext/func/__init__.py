@@ -1,4 +1,3 @@
-from . import json
-from . import datetime
+from . import datetime, json
 
 __all__ = ["json", "datetime"]
