@@ -25,4 +25,4 @@
 
 ---
 
-# {{ PROJECT }}
+SQLAlchemy extension.
