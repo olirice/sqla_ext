@@ -78,5 +78,8 @@ setuptools.setup(
         "Programming Language :: Python :: 3.8",
     ],
     install_requires=["typing_extensions", "sqlalchemy>=1.3.*"],
-    extras_require={"dev": DEV_REQUIRES},
+    extras_require={
+        "dev": DEV_REQUIRES,
+        "docs": ["mkdocs", "mkautodoc", "pygments", "pymdown-extensions"],
+    },
 )

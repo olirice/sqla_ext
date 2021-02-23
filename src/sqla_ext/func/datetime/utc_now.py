@@ -7,6 +7,8 @@ from sqlalchemy.types import DateTime
 
 
 class utc_now(FunctionElement):
+    """Current timestamp in UTC timezone"""
+
     type = DateTime()
 
 

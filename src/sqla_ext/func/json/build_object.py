@@ -7,6 +7,8 @@ from sqlalchemy.types import JSON
 
 
 class build_object(FunctionElement):
+    """JSON object creation"""
+
     type = JSON()
     name = "jsonb_build_object"
 

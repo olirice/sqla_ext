@@ -7,6 +7,8 @@ from sqlalchemy.types import JSON
 
 
 class agg(FunctionElement):
+    """JSON array aggregation"""
+
     type = JSON()
     name = "agg"
 
