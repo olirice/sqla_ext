@@ -2,7 +2,7 @@
 
 <p>
 
-<a href="https://github.com/olirice/sqla_ext/actions"><img src="https://github.com/olirice/sqla_ext/workflows/Tests/badge.svg" alt="Tests" height="18"></a>
+<a href="https://github.com/olirice/sqla_ext/actions"><img src="https://github.com/olirice/sqla_ext/workflows/tests/badge.svg" alt="Tests" height="18"></a>
 <a href="https://sqla_ext.readthedocs.io/en/latest/?badge=latest"><img src="https://readthedocs.org/projects/sqla_ext/badge/?version=latest" alt="Tests" height="18"></a>
 <a href="https://codecov.io/gh/olirice/sqla_ext"><img src="https://codecov.io/gh/olirice/sqla_ext/branch/master/graph/badge.svg" height="18"></a>
 <a href="https://github.com/psf/black">
