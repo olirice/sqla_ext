@@ -15,7 +15,7 @@ class build_object(FunctionElement):
 def pg_build_object(
     element: build_object, compiler: SQLCompiler, **kw: Dict[str, Any]
 ) -> SQLCompiler:
-    return compiler.visit_function(element)
+    return "jsonb_build_object(%s)" % compiler.process(element.clauses, **kw)
 
 
 @compiles(build_object, "sqlite")

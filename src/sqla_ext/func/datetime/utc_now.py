@@ -12,7 +12,7 @@ class utc_now(FunctionElement):
 
 @compiles(utc_now, "postgresql")
 def pg(element: utc_now, compiler: SQLCompiler, **kw: Dict[str, Any]) -> SQLCompiler:
-    return "TIMEZONE('utc', CURRENT_TIMESTAMP)"
+    return "timezone('utc', current_timestamp)"
 
 
 @compiles(utc_now, "sqlite")
