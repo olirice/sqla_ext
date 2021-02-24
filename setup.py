@@ -31,17 +31,6 @@ def read_package_variable(key: str, filename: str = "__init__.py") -> "Optional[
     return None
 
 
-def build_description() -> str:
-    """Build a description for the project from documentation files."""
-    try:
-        readme = open("docs/welcome.rst").read()
-        changelog = open("docs/versions.rst").read()
-    except IOError:
-        return "<placeholder>"
-    else:
-        return readme + "\n" + changelog
-
-
 check_python_version()
 
 
@@ -64,7 +53,6 @@ setuptools.setup(
     author_email="oliver@oliverrice.com",
     packages=setuptools.find_packages("src", exclude=("src/tests",)),
     package_dir={"": "src"},
-    long_description=build_description(),
     tests_require=["pytest", "coverage"],
     license="MIT",
     classifiers=[
