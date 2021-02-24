@@ -18,3 +18,9 @@ Version History
 * Test all dialects of `func` functions
 * Minimal docstrings
 * Initail RTD documentation
+
+
+0.0.2
+-----
+
+* Added func.json.to_array for casting json/jsonb arrays to native arrays
