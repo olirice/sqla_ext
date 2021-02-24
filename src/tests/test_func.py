@@ -1,8 +1,9 @@
 import pytest
-from sqlalchemy import Integer, column, table
+from sqlalchemy import Integer, column, literal, table
 from sqlalchemy.dialects import mysql, postgresql, sqlite
 from sqlalchemy.sql.compiler import SQLCompiler
 from sqlalchemy.sql.expression import FunctionElement
+from sqlalchemy.testing.assertions import eq_ignore_whitespace
 
 from sqla_ext import func
 
@@ -28,12 +29,19 @@ t = table("xyz", column("q", Integer()))
         (func.datetime.utc_now(), "timezone('utc', current_timestamp)", postgresql),
         (func.datetime.utc_now(), "datetime('now')", sqlite),
         (func.datetime.utc_now(), "utc_timestamp()", mysql),
+        # func.json.to_array
+        (
+            func.json.to_array(literal("'[1,2,3,4]'::jsonb"), Integer()),
+            """(SELECT array_agg(CAST(anon_1 AS INTEGER)) AS array_agg_1
+            FROM jsonb_array_elements(CAST('''[1,2,3,4]''::jsonb' AS JSONB)) AS anon_1)""",
+            postgresql,
+        ),
     ],
 )
-def test_json_function(
+def test_function(
     statement: FunctionElement, output: str, dialect: SQLCompiler
 ) -> None:
     compiled = statement.compile(
         dialect=dialect.dialect(), compile_kwargs={"literal_binds": True}
     )
-    assert str(compiled) == output
+    eq_ignore_whitespace(str(compiled), output)
