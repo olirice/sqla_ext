@@ -1,5 +1,5 @@
 import pytest
-from sqlalchemy import Integer, column, literal, table
+from sqlalchemy import Integer, column, table, text
 from sqlalchemy.dialects import mysql, postgresql, sqlite
 from sqlalchemy.sql.compiler import SQLCompiler
 from sqlalchemy.sql.expression import FunctionElement
@@ -31,9 +31,8 @@ t = table("xyz", column("q", Integer()))
         (func.datetime.utc_now(), "utc_timestamp()", mysql),
         # func.json.to_array
         (
-            func.json.to_array(literal("'[1,2,3,4]'::jsonb"), Integer()),
-            """(SELECT array_agg(CAST(anon_1 AS INTEGER)) AS array_agg_1
-            FROM jsonb_array_elements(CAST('''[1,2,3,4]''::jsonb' AS JSONB)) AS anon_1)""",
+            func.json.to_array(text("'[1,2,3,4]'::jsonb"), Integer),
+            """SELECT array_agg(CAST(anon_1 AS INTEGER)) AS array_agg_1 FROM jsonb_array_elements(CAST('[1,2,3,4]'::jsonb AS JSONB)) AS anon_1""",
             postgresql,
         ),
     ],

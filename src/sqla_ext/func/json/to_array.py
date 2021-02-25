@@ -31,13 +31,11 @@ def pg(element: function, compiler: SQLCompiler, **kw: Dict[str, Any]) -> SQLCom
 
     type_ = type_bind_param.value
 
-    assert isinstance(type_, TypeEngine)
+    assert isinstance(type_, TypeEngine) or issubclass(type_, TypeEngine)
 
-    select_from = sqla_func.jsonb_array_elements(cast(json_field, JSONB())).alias()
-    statement = (
-        select([sqla_func.array_agg(cast(select_from.column, type_))])
-        .select_from(select_from)
-        .scalar_subquery()
+    select_from = sqla_func.jsonb_array_elements(cast(json_field, JSONB)).table_valued(
+        "value"
     )
+    statement = select([sqla_func.array_agg(cast(select_from.column, type_))])
 
     return compiler.process(statement, **kw)
