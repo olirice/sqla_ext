@@ -7,7 +7,34 @@ from sqlalchemy.types import DateTime
 
 
 class utc_now(FunctionElement):
-    """Current timestamp in UTC timezone"""
+    r"""Current timestamp in UTC timezone
+
+    :Dialects:
+        - mysql
+        - postgresql
+        - sqlite
+
+    :return: :class:`FuntionElement`
+
+    E.g.::
+
+        from sqlalchemy import select
+        from sqla_ext import func as func_ext
+
+        query = select([
+            func_ext.datetime.utc_now()
+        ])
+
+    The above statement will produce SQL resembling::
+
+        SELECT
+            timezone('utc', current_timestamp)
+    """
+
+    name = "to_array"
+
+    def __init__(self) -> None:
+        super().__init__()
 
     type = DateTime()
 

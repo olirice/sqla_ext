@@ -1,6 +1,6 @@
-===============
-Version History
-===============
+=========
+Changelog
+=========
 
 .. automodule:: sqla_ext
 
@@ -24,3 +24,9 @@ Version History
 -----
 
 * Added func.json.to_array for casting json/jsonb arrays to native arrays
+
+
+Master
+------
+
+* Doc fixes

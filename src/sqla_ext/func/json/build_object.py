@@ -7,7 +7,33 @@ from sqlalchemy.types import JSON
 
 
 class build_object(FunctionElement):
-    """JSON object creation"""
+    r"""JSON object creation
+
+    :Dialects:
+        - mysql
+        - postgresql
+        - sqlite
+
+    :param expression: A SQL expression, such as a
+        :class:`ColumnElement` expression or a :class:`TextClause` with elements
+        that are castable as JSON
+
+    :return: :class:`FuntionElement`
+
+    E.g.::
+
+        from sqlalchemy import select
+        from sqla_ext import func as func_ext
+
+        query = select([
+            func_ext.json.build_object("first_key", "first_value", "second_key", 2)
+        ])
+
+    The above statement will produce SQL resembling::
+
+        SELECT
+            jsonb_build_object('first_key', 'first_value', 'second_key', 2)
+    """
 
     type = JSON()
     name = "jsonb_build_object"
