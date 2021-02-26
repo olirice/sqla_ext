@@ -12,7 +12,7 @@ from sqla_ext.types import ORMTableProtocol, TableCoercable
 def to_core_table(entity: TableCoercable) -> Table:
     r"""Coerces multiple SQLA Table-like entities to a core sqlalcehmy.Table
 
-    :param entity: A sqlalchemy :class:`Table`, :class::`DeclarativeBase` or :class:`Mapper`
+    :param entity: A sqlalchemy :class:`Table`, :class:`DeclarativeBase` or :class:`Mapper`
 
     :return: :class:`Table`
     """

@@ -12,7 +12,7 @@ from .to_core_table import to_core_table
 def to_schema_name(entity: TableCoercable) -> Optional[str]:
     r"""Get the schema of a sqlalchemy table-like entity
 
-    :param entity: A sqlalchemy :class:`Table`, :class::`DeclarativeBase` or :class:`Mapper`
+    :param entity: A sqlalchemy :class:`Table`, :class:`DeclarativeBase` or :class:`Mapper`
 
     :return: :class:`Optional[str]`
     """
