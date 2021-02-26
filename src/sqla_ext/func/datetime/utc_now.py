@@ -40,17 +40,15 @@ class utc_now(FunctionElement):
 
 
 @compiles(utc_now, "postgresql")
-def pg(element: utc_now, compiler: SQLCompiler, **kw: Dict[str, Any]) -> SQLCompiler:
+def pg(element: utc_now, compiler: SQLCompiler, **kw: Dict[str, Any]) -> str:
     return "timezone('utc', current_timestamp)"
 
 
 @compiles(utc_now, "sqlite")
-def sqlite(
-    element: utc_now, compiler: SQLCompiler, **kw: Dict[str, Any]
-) -> SQLCompiler:
+def sqlite(element: utc_now, compiler: SQLCompiler, **kw: Dict[str, Any]) -> str:
     return "datetime('now')"
 
 
 @compiles(utc_now, "mysql")
-def mysql(element: utc_now, compiler: SQLCompiler, **kw: Dict[str, Any]) -> SQLCompiler:
+def mysql(element: utc_now, compiler: SQLCompiler, **kw: Dict[str, Any]) -> str:
     return "utc_timestamp()"

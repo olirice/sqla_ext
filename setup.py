@@ -10,7 +10,7 @@ from typing import Optional
 import setuptools
 
 PACKAGE_NAME = "sqla_ext"
-MINIMUM_PYTHON_VERSION = "3.6"
+MINIMUM_PYTHON_VERSION = "3.7"
 
 
 def check_python_version() -> None:
@@ -65,7 +65,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
     ],
-    install_requires=["typing_extensions", "sqlalchemy>=1.4.0b3"],
+    install_requires=["typing_extensions", "sqlalchemy>=1.4.0b3", "sqlalchemy-stubs"],
     extras_require={
         "dev": DEV_REQUIRES,
         "docs": ["mkdocs", "mkautodoc", "pygments", "pymdown-extensions"],

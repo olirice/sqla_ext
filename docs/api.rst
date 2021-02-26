@@ -32,3 +32,22 @@ Datetime Functions
 datetime.utc_now
 ^^^^^^^^^^^^^^^^
 .. autofunction:: sqla_ext.func.datetime.utc_now
+
+
+Inspect
+=======
+.. automodule:: sqla_ext.inspect
+
+to_core_table
+^^^^^^^^^^^^^
+.. autofunction:: sqla_ext.inspect.to_core_table
+
+to_schema_name
+^^^^^^^^^^^^^^
+.. autofunction:: sqla_ext.inspect.to_schema_name
+
+to_table_name
+^^^^^^^^^^^^^
+.. autofunction:: sqla_ext.inspect.to_table_name
+
+

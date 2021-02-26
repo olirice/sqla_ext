@@ -1,3 +1,6 @@
+# pylint: disable= unsubscriptable-object
+from __future__ import annotations
+
 from typing import Any, Dict, Union
 
 from sqlalchemy import func as sqla_func
@@ -6,11 +9,12 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.compiler import compiles
 from sqlalchemy.sql import cast
 from sqlalchemy.sql.compiler import SQLCompiler
-from sqlalchemy.sql.expression import ColumnClause, FunctionElement, TextClause
+from sqlalchemy.sql.expression import ColumnClause, TextClause
+from sqlalchemy.sql.functions import GenericFunction
 from sqlalchemy.sql.type_api import TypeEngine
 
 
-class to_array(FunctionElement):
+class to_array(GenericFunction):  # type: ignore
     r"""Cast a json array to a native array
 
     :Dialects:
@@ -53,16 +57,12 @@ function = to_array
 
 
 @compiles(function, "postgresql")
-def pg(element: function, compiler: SQLCompiler, **kw: Dict[str, Any]) -> SQLCompiler:
+def pg(element: function, compiler: SQLCompiler, **kw: Dict[str, Any]) -> str:
 
-    args = element.clauses
-
-    if len(args) != 2:
-        raise Exception("Invalid n arguments for to_array")
-
-    json_field, type_bind_param = args
-
-    type_ = type_bind_param.value
+    args = iter(element.clauses)  # type: ignore
+    json_field = next(args)  # type: ignore
+    type_bind_param = next(args)  # type: ignore
+    type_: TypeEngine = type_bind_param.value  # type: ignore
 
     assert isinstance(type_, TypeEngine) or issubclass(type_, TypeEngine)
 

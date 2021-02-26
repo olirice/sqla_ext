@@ -26,7 +26,19 @@ Changelog
 * Added func.json.to_array for casting json/jsonb arrays to native arrays
 
 
+0.0.3
+-----
+
+* Doc fixes
+* Added `sqla_ext.types` module for sharing type definitions
+* Added `sqla_ext.inspect` module for extracting info from sqlalchemy entities
+* Added `inspect.to_core_table` for casting multiple table-like entities to a `sqlalchemy.Table`
+* Added `inspect.to_table_name` for getting a table name from a table-like entity
+* Added `inspect.to_schema_name` for getting a schema name from a table-like entity
+
 Master
 ------
 
-* Doc fixes
+* Nothing yet.
+
+

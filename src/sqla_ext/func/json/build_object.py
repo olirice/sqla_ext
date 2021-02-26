@@ -6,7 +6,7 @@ from sqlalchemy.sql.expression import FunctionElement
 from sqlalchemy.types import JSON
 
 
-class build_object(FunctionElement):
+class build_object(FunctionElement):  # type: ignore
     r"""JSON object creation
 
     :Dialects:
@@ -42,7 +42,7 @@ class build_object(FunctionElement):
 @compiles(build_object, "postgresql")
 def pg_build_object(
     element: build_object, compiler: SQLCompiler, **kw: Dict[str, Any]
-) -> SQLCompiler:
+) -> str:
     return "jsonb_build_object(%s)" % compiler.process(element.clauses, **kw)
 
 
@@ -50,5 +50,5 @@ def pg_build_object(
 @compiles(build_object, "mysql")
 def other_build_object(
     element: build_object, compiler: SQLCompiler, **kw: Dict[str, Any]
-) -> SQLCompiler:
+) -> str:
     return "json_object(%s)" % compiler.process(element.clauses, **kw)

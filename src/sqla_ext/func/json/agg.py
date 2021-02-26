@@ -2,11 +2,12 @@ from typing import Any, Dict, Union
 
 from sqlalchemy.ext.compiler import compiles
 from sqlalchemy.sql.compiler import SQLCompiler
-from sqlalchemy.sql.expression import ColumnClause, FunctionElement, TextClause
+from sqlalchemy.sql.expression import ColumnClause, TextClause
+from sqlalchemy.sql.functions import GenericFunction
 from sqlalchemy.types import JSON
 
 
-class agg(FunctionElement):
+class agg(GenericFunction):  # type: ignore
     r"""JSON array aggregation
 
     :Dialects:
@@ -47,15 +48,15 @@ class agg(FunctionElement):
 
 
 @compiles(agg, "postgresql")
-def pg(element: agg, compiler: SQLCompiler, **kw: Dict[str, Any]) -> SQLCompiler:
+def pg(element: agg, compiler: SQLCompiler, **kw: Dict[str, Any]) -> str:
     return "jsonb_agg(%s)" % compiler.process(element.clauses, **kw)
 
 
 @compiles(agg, "sqlite")
-def sqlite(element: agg, compiler: SQLCompiler, **kw: Dict[str, Any]) -> SQLCompiler:
+def sqlite(element: agg, compiler: SQLCompiler, **kw: Dict[str, Any]) -> str:
     return "json_group_array(%s)" % compiler.process(element.clauses, **kw)
 
 
 @compiles(agg, "mysql")
-def mysql(element: agg, compiler: SQLCompiler, **kw: Dict[str, Any]) -> SQLCompiler:
+def mysql(element: agg, compiler: SQLCompiler, **kw: Dict[str, Any]) -> str:
     return "json_arrayagg(%s)" % compiler.process(element.clauses, **kw)
