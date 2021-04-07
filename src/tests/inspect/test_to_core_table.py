@@ -3,7 +3,7 @@ from sqlalchemy import Table
 from sqlalchemy.orm import Mapper
 
 from sqla_ext.inspect import to_core_table
-from sqla_ext.types import ORMTableProtocol
+from sqla_ext.protocols import ORMTableProtocol
 
 
 def test_table_to_core_table(core_table: Table) -> None:

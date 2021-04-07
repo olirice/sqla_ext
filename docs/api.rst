@@ -51,3 +51,10 @@ to_table_name
 .. autofunction:: sqla_ext.inspect.to_table_name
 
 
+Types
+=====
+.. automodule:: sqla_ext.types
+
+CITEXT
+^^^^^^
+.. autoclass:: sqla_ext.types.postgresql.CITEXT

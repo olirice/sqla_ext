@@ -5,7 +5,7 @@ from functools import lru_cache
 from sqlalchemy import Table
 from sqlalchemy.orm import Mapper
 
-from sqla_ext.types import ORMTableProtocol, TableCoercable
+from sqla_ext.protocols import ORMTableProtocol, TableCoercable
 
 
 @lru_cache()

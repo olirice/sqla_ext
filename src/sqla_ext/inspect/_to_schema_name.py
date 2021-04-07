@@ -3,9 +3,8 @@ from __future__ import annotations
 from functools import lru_cache
 from typing import Optional
 
-from sqla_ext.types import TableCoercable
-
-from .to_core_table import to_core_table
+from sqla_ext.inspect._to_core_table import to_core_table
+from sqla_ext.protocols import TableCoercable
 
 
 @lru_cache()

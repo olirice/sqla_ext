@@ -36,9 +36,17 @@ Changelog
 * Added `inspect.to_table_name` for getting a table name from a table-like entity
 * Added `inspect.to_schema_name` for getting a schema name from a table-like entity
 
+
+0.0.4
+-----
+
+* Added `sqla_ext.types.postgresql` module for sharing postgres type definitions
+* Added `sqla_ext.types.postgresql.CITEX` for case insensitive strings
+
+
 Master
 ------
 
-* Nothing yet.
+* Nothing yet
 
 

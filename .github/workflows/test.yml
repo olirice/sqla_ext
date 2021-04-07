@@ -5,6 +5,18 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_DB: sqla_ext_pg_test
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: pytest
+          POSTGRES_PASSWORD: pytest_password
+        ports:
+        - 6012:5432
 
     strategy:
         matrix:
