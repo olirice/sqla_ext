@@ -2,7 +2,7 @@ from typing import Any, Dict, Union
 
 from sqlalchemy.ext.compiler import compiles
 from sqlalchemy.sql.compiler import SQLCompiler
-from sqlalchemy.sql.expression import ColumnClause, TextClause
+from sqlalchemy.sql.elements import ColumnClause, TextClause
 from sqlalchemy.sql.functions import GenericFunction
 from sqlalchemy.types import JSON
 
@@ -42,6 +42,8 @@ class agg(GenericFunction):  # type: ignore
 
     type = JSON()
     name = "agg"
+
+    clauses: Any
 
     def __init__(self, expression: Union[ColumnClause, TextClause]) -> None:
         super().__init__(expression)

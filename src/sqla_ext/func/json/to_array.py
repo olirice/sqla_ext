@@ -9,7 +9,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.compiler import compiles
 from sqlalchemy.sql import cast
 from sqlalchemy.sql.compiler import SQLCompiler
-from sqlalchemy.sql.expression import ColumnClause, TextClause
+from sqlalchemy.sql.elements import ColumnClause, TextClause
 from sqlalchemy.sql.functions import GenericFunction
 from sqlalchemy.sql.type_api import TypeEngine
 

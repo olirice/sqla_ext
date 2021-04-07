@@ -4,16 +4,16 @@ from sqlalchemy.dialects import mysql as mysql_
 from sqlalchemy.dialects import postgresql as pg_
 from sqlalchemy.dialects import sqlite as sqlite_
 from sqlalchemy.sql.compiler import SQLCompiler
-from sqlalchemy.sql.expression import FunctionElement
+from sqlalchemy.sql.functions import FunctionElement
 from sqlalchemy.testing.assertions import eq_ignore_whitespace
 
 from sqla_ext import func
 
 t = table("xyz", column("q", Integer()))
 
-sqlite = sqlite_.dialect()
-mysql = mysql_.dialect()
-pg = pg_.dialect()
+sqlite = sqlite_.dialect()  # type: ignore
+mysql = mysql_.dialect()  # type: ignore
+pg = pg_.dialect()  # type: ignore
 
 
 @pytest.mark.parametrize(

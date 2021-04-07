@@ -2,7 +2,7 @@ from typing import Any, Dict
 
 from sqlalchemy.ext.compiler import compiles
 from sqlalchemy.sql.compiler import SQLCompiler
-from sqlalchemy.sql.expression import FunctionElement
+from sqlalchemy.sql.functions import FunctionElement
 from sqlalchemy.types import DateTime
 
 
