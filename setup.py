@@ -44,6 +44,7 @@ DEV_REQUIRES = [
     "black",
     "mypy",
     "asyncpg",
+    "sqlalchemy[mypy]",
 ]
 
 setuptools.setup(
@@ -67,7 +68,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
     ],
-    install_requires=["typing_extensions", "sqlalchemy[mypy]>=1.4.0"],
+    install_requires=["typing_extensions", "sqlalchemy>=1.4.0"],
     extras_require={
         "dev": DEV_REQUIRES,
         "docs": ["mkdocs", "mkautodoc", "pygments", "pymdown-extensions"],
