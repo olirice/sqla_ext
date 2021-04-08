@@ -25,4 +25,10 @@
 
 ---
 
-SQLAlchemy extension.
+SQLAlchemy extension
+
+This package is under active development and may change significantly. There is no stability guarentee. If you see something you like, please vendor it for now. 
+
+Thanks,
+
+Oli
