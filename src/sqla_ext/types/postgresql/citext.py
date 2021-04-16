@@ -1,7 +1,8 @@
 from typing import Callable
 
 import sqlalchemy.types as types
-from sqlalchemy.dialects.postgresql.base import PGDialect, ischema_names
+from sqlalchemy.dialects.postgresql.base import ischema_names
+from sqlalchemy.engine import Dialect
 
 
 class CITEXT(types.Concatenable, types.UserDefinedType):
@@ -38,11 +39,11 @@ class CITEXT(types.Concatenable, types.UserDefinedType):
         assert user.id == 1
     """
 
-    def literal_processor(self, dialect: PGDialect) -> Callable:
+    def literal_processor(self, dialect: Dialect) -> Callable:
         def process(value: str) -> str:
             value = value.replace("'", "''")
 
-            if dialect.identifier_preparer._double_percents:
+            if dialect.identifier_preparer._double_percents:  # type: ignore
                 value = value.replace("%", "%%")
 
             return "'%s'" % value
@@ -52,13 +53,13 @@ class CITEXT(types.Concatenable, types.UserDefinedType):
     def get_col_spec(self) -> str:
         return "CITEXT"
 
-    def bind_processor(self, dialect: PGDialect) -> Callable:
+    def bind_processor(self, dialect: Dialect) -> Callable:
         def process(value: str) -> str:
             return value
 
         return process
 
-    def result_processor(self, dialect: PGDialect, coltype: int) -> Callable:
+    def result_processor(self, dialect: Dialect, coltype: int) -> Callable:
         def process(value: str) -> str:
             return value
 

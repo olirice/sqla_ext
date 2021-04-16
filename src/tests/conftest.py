@@ -47,7 +47,10 @@ def dockerize_database() -> Generator[None, None, None]:
     container_name = "sqla_ext_pg_test"
 
     def is_ready() -> bool:
-        out = subprocess.check_output(["docker", "inspect", container_name])
+        try:
+            out = subprocess.check_output(["docker", "inspect", container_name])
+        except:
+            return False
         container_info = json.loads(out)
         container_health_status = container_info[0]["State"]["Health"]["Status"]
         if container_health_status == "healthy":
@@ -111,7 +114,11 @@ async def async_engine(dockerize_database: None) -> AsyncGenerator[AsyncEngine, 
 @pytest.fixture(scope="function")
 async def sess(async_engine: AsyncEngine) -> AsyncGenerator[Session, None]:
 
-    Session = sessionmaker(async_engine, expire_on_commit=False, class_=AsyncSession)
+    Session = sessionmaker(  # type: ignore
+        bind=async_engine,
+        class_=AsyncSession,
+        expire_on_commit=False,
+    )
 
     async with async_engine.begin() as conn:
 
@@ -137,4 +144,4 @@ async def sess(async_engine: AsyncEngine) -> AsyncGenerator[Session, None]:
         await _session.close()
 
         # Rollback to the savepoint, eliminating everything that happend to the _session
-        await conn.rollback()
+        await conn.rollback()  # type: ignore
